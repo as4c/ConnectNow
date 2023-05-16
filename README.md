@@ -1,19 +1,19 @@
 # Getting Started Guide 
-For a guide on pushing a project like this to production check out this repo: [https://github.com/mitchtabian/HOWTO-django-channels-daphne](https://github.com/mitchtabian/HOWTO-django-channels-daphne). 
+<!-- For a guide on pushing a project like this to production check out this repo: [https://github.com/mitchtabian/HOWTO-django-channels-daphne](https://github.com/mitchtabian/HOWTO-django-channels-daphne).  -->
 
 
 This document is a guide to creating a new django project that uses:
 1. windows
-1. python3.8.2
+1. python3.10.2
 1. pip
-1. django 2.2.15 (LTS)
+1. django 4.0.0 
 1. virtualenv
 1. Redis
-1. django channels 2
+1. django channels 
 1. Postgres
 
 ## Install Python3.8.2
-Bottom of page: https://www.python.org/downloads/release/python-382/
+Bottom of page: https://www.python.org/downloads/release/python-310/
 
 ## Installing pip
 1. https://pypi.org/project/pip/
@@ -22,7 +22,7 @@ Bottom of page: https://www.python.org/downloads/release/python-382/
 
 ## Setup virtualenv
 1. Navigate to where you want to keep your django projects. I use `D://DjangoProjects/`
-1. Create `D://DjangoProjects/ChatServerPlayground` folder or whatever you want to name the project.
+1. Create `D://DjangoProjects/ConnectNow` folder or whatever you want to name the project.
 1. Create a virtual environment to run the project in.
 	- Typically I call it "venv" but you can call it something else if you like. Doesn't matter. djangoproject_venv for example.
 	- `python -m venv venv` or `python -m venv djangoproject_venv` if you like
@@ -37,15 +37,15 @@ Bottom of page: https://www.python.org/downloads/release/python-382/
 
 ## Install Django and create Django project
 1. Install django 
-	- `python -m pip install Django==2.2.15`
+	- `python -m pip install Django`
 	- See LTS: https://www.djangoproject.com/download/
 1. Create the django project
-	- `django-admin startproject ChatServerPlayground`
-1. Rename root directory (`ChatServerPlayground`) to `src`
+	- `django-admin startproject ConnectNow`
+1. Rename root directory (`ConnectNow`) to `src`
 	- I prefer to name my root directory `src` because inside the project is another folder named `ChatServerPlayground` or whatever you called your project
 	- So now you should have the following folder structure:
-		- `D://DjangoProjects/ChatServerPlayground/venv/src/`
-			- Inside `src` you will have a folder name `ChatServerPlayground` and a `manage.py` file
+		- `D://DjangoProjects/ConnectNow/venv/src/`
+			- Inside `src` you will have a folder name `ConnectNow` and a `manage.py` file
 1. Keep track of the libraries you use
 	- `pip freeze > requirements.txt`
 1. Run the server to make sure it's working
@@ -70,24 +70,24 @@ Postgres needs to run as a service on your machine. Since I'm using windows I wi
 	1. List databases
 		- `\l`
 	1. Connect to a different database
-		- `\c codingwithmitch_chat`
+		- `\c ConnectNow`
 		- **Keep in mind** you will not have any other databases. We will create one in a second.
 	1. List the tables in a database
 		`\dt`
 	1. create a new database for our project
-		- `CREATE DATABASE codingwithmitch_chat_dev;`
+		- `CREATE DATABASE connectnow_db;`
 	1. Create a new user that has permissions to use that database
 		- `CREATE USER django WITH PASSWORD 'password';`
 		- These credentials are important to remember because they are used in the django postgres configuration.
 	1. List all users
 		- `/du`
 	1. Give the new user all privileges on new db
-		- `GRANT ALL PRIVILEGES ON DATABASE codingwithmitch_chat_dev TO django;`
+		- `GRANT ALL PRIVILEGES ON DATABASE connect_db TO django;`
 	1. Test
 		1. disconnect from db
 			- `\q`
 		1. Connect to the db with user
-			- `psql codingwithmitch_chat_dev django`
+			- `psql connect_db  django`
 
 
 ## Django and Postgres Setup
@@ -97,7 +97,7 @@ Postgres needs to run as a service on your machine. Since I'm using windows I wi
 	- `pip freeze > requirements.txt`
 1. Update `settings.py` with the following postgres configuration
 	```
-	DB_NAME = "codingwithmitch_chat_dev"
+	DB_NAME = "connect_db "
 	DB_USER = "django"
 	DB_PASSWORD = "password"
 	DATABASES = {
@@ -152,10 +152,10 @@ Follow https://channels.readthedocs.io/en/latest/installation.html
 	    'django.contrib.sessions',
 	    'django.contrib.sites',
 	    ...
-	    'channels',
+	    'daphne',
 	)
 	```
-1. create default routing file `ChatServerPlayground/routing.py`
+1. create default routing file `ConnectNow/asgi.py`
 	```
 	from channels.auth import AuthMiddlewareStack
 	from channels.routing import ProtocolTypeRouter, URLRouter
@@ -172,7 +172,7 @@ Follow https://channels.readthedocs.io/en/latest/installation.html
 	Learn more here: <a href="https://channels.readthedocs.io/en/latest/topics/routing.html?highlight=ProtocolTypeRouter#protocoltyperouter">`ProtocolTypeRouter`</a>, <a href="https://channels.readthedocs.io/en/latest/topics/security.html?highlight=AllowedHostsOriginValidator">`AllowedHostsOriginValidator`</a>, <a href="https://channels.readthedocs.io/en/latest/one-to-two.html?highlight=AuthMiddlewareStack#http-sessions-and-django-auth">`AuthMiddlewareStack`</a> and <a href="https://channels.readthedocs.io/en/latest/topics/routing.html?highlight=urlrouter">`URLRouter`</a>
 1. set your ASGI_APPLICATION in `settings.py`
 	```
-	ASGI_APPLICATION = "ChatServerPlayground.routing.application"
+	ASGI_APPLICATION = "ConnectNow.asgi.application"
 	```
 1. Now you create Consumers and add to the `URLRouter` list.
 
