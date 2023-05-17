@@ -158,7 +158,7 @@
 				<div class="d-flex flex-row align-items-center card-header" id="id_room_title">
 					<a class="d-flex flex-row" target="_blank" id="id_user_info_container">
 						<img class="profile-image rounded-circle img-fluid" id="id_other_user_profile_image"
-							src="{% static 'images/default.png' %}">
+							src='{% static "images/default.png" %}'>
 						<h3 class="ml-2" id="id_other_username"></h3>
 					</a>
 
@@ -470,7 +470,7 @@
     profileImage.classList.add("profile-image");
     profileImage.classList.add("rounded-circle");
     profileImage.classList.add("img-fluid");
-    profileImage.src = "{% static 'images/default.png' %}";
+    profileImage.src = "{% static 'images/default.png' %}".replace(/&amp;/g,"&");
     var profile_image_id = "id_profile_image_" + msg_id;
     profileImage.id = profile_image_id;
     newMessageDiv.appendChild(profileImage);
@@ -528,74 +528,6 @@
 
     preloadImage(profile_image, profile_image_id);
 	}
-	// function createChatMessageElement(msg, msg_id, username, profile_image, user_id, timestamp, maintainPosition, isNewMessage) {
-	// 	var chatLog = document.getElementById("id_chat_log")
-
-	// 	var newMessageDiv = document.createElement("div")
-	// 	newMessageDiv.classList.add("d-flex")
-	// 	newMessageDiv.classList.add("flex-row")
-	// 	newMessageDiv.classList.add("message-container")
-
-	// 	var profileImage = document.createElement("img")
-	// 	profileImage.addEventListener("click", function (e) {
-	// 		selectUser(user_id)
-	// 	})
-	// 	profileImage.classList.add("profile-image")
-	// 	profileImage.classList.add("rounded-circle")
-	// 	profileImage.classList.add("img-fluid")
-	// 	profileImage.src = "{% static 'images/default.png' %}"
-	// 	var profile_image_id = "id_profile_image_" + msg_id
-	// 	profileImage.id = profile_image_id
-	// 	newMessageDiv.appendChild(profileImage)
-
-	// 	var div1 = document.createElement("div")
-	// 	div1.classList.add("d-flex")
-	// 	div1.classList.add("flex-column")
-
-	// 	var div2 = document.createElement("div")
-	// 	div2.classList.add("d-flex")
-	// 	div2.classList.add("flex-row")
-
-	// 	var usernameSpan = document.createElement("span")
-	// 	usernameSpan.innerHTML = username
-	// 	usernameSpan.classList.add("username-span")
-	// 	usernameSpan.addEventListener("click", function (e) {
-	// 		selectUser(user_id)
-	// 	})
-	// 	div2.appendChild(usernameSpan)
-
-	// 	var timestampSpan = document.createElement("span")
-	// 	timestampSpan.innerHTML = timestamp
-	// 	timestampSpan.classList.add("timestamp-span")
-	// 	timestampSpan.classList.add("d-flex")
-	// 	timestampSpan.classList.add("align-items-center")
-	// 	timestampSpan.addEventListener("click", function (e) {
-	// 		selectUser(user_id)
-	// 	})
-	// 	div2.appendChild(timestampSpan)
-
-	// 	div1.appendChild(div2)
-
-	// 	var msgP = document.createElement("p")
-	// 	msgP.innerHTML = validateText(msg)
-	// 	msgP.classList.add("msg-p")
-	// 	div1.appendChild(msgP)
-
-	// 	newMessageDiv.appendChild(div1)
-
-	// 	if (isNewMessage) {
-	// 		chatLog.insertBefore(newMessageDiv, chatLog.firstChild)
-	// 	}
-	// 	else {
-	// 		chatLog.appendChild(newMessageDiv)
-	// 	}
-
-	// 	if (!maintainPosition) {
-	// 		chatLog.scrollTop = chatLog.scrollHeight
-	// 	}
-
-	// 	preloadImage(profile_image, profile_image_id)
-	// }
 
 	function createConnectedDisconnectedElement(msg, msd_id, profile_image, user_id) {
 		var chatLog = document.getElementById("id_chat_log")
@@ -612,7 +544,7 @@
 		profileImage.classList.add("profile-image")
 		profileImage.classList.add("rounded-circle")
 		profileImage.classList.add("img-fluid")
-		profileImage.src = "{% static 'images/default.png' %}"
+		profileImage.src = "{% static 'images/default.png' %}".replace(/&amp;/g,"&")
 		var profile_image_id = "id_profile_image_" + msg_id
 		profileImage.id = profile_image_id
 		newMessageDiv.appendChild(profileImage)
