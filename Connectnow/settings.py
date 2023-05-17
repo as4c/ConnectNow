@@ -100,19 +100,16 @@ CHANNEL_LAYERS = {
     },
 }
 
-DB_NAME = "connectnow_db"
-DB_USER = "connectadmin"
-DB_PASSWORD = "admin@321"
 
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': DB_NAME,
-        'USER': DB_USER,
-        'PASSWORD': DB_PASSWORD,
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '',
     }
 }
 
