@@ -100,9 +100,9 @@ CHANNEL_LAYERS = {
     },
 }
 
-DB_NAME = "chat_app_db"
-DB_USER = "chatadmin"
-DB_PASSWORD = "sagar&8676"
+DB_NAME = "connectnow_db"
+DB_USER = "connectadmin"
+DB_PASSWORD = "admin@321"
 
 
 DATABASES = {
