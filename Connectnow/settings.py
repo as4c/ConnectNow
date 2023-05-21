@@ -195,7 +195,7 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'ConnectNow Team <noreply@codingwithmitch.com>'
+DEFAULT_FROM_EMAIL = 'ConnectNow Team <noreply@connectnow.com>'
 
 
 BASE_URL = "http://139.59.74.186"
